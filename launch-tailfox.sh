@@ -48,6 +48,12 @@ PROFILE_DIR="$HOME/.mozilla/firefox/custom-profile"
 if [ ! -d "$PROFILE_DIR" ]; then
   echo "Extracting pre-configured Firefox profile..."
   unzip ./preconfigured-profile.zip -d "$HOME/.mozilla/firefox/"
+  
+  # Silent profile initialization (run in the background to avoid profile warning)
+  firefox --profile "$HOME/.mozilla/firefox/custom-profile" --headless &
+  
+  # Wait for Firefox to complete the background initialization
+  sleep 5
 else
   echo "Pre-configured profile already exists."
 fi
@@ -72,7 +78,7 @@ fi
 
 # Launch Tailfox Browser with the pre-configured profile
 echo "Launching Tailfox Browser..."
-firefox --profile "$HOME/.mozilla/firefox/custom-profile" --no-default-browser-check
+firefox --profile "$HOME/.mozilla/firefox/custom-profile" --no-default-browser-check --allow-downgrade
 
 # Overwrite default Firefox desktop entry with custom icon and name
 DESKTOP_ENTRY_PATH="/usr/share/applications/firefox.desktop"
