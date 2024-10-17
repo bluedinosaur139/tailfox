@@ -10,7 +10,7 @@ simple install, either copy the commands or enter them manually one at a time:
 ```
 git clone https://github.com/bluedinosaur139/tailfox.git
 cd tailfox
-sh launch-tailfox
+sh launch-tailfox.sh
 ```
 
 if you dont have git:
