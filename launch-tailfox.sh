@@ -70,22 +70,26 @@ else
   echo "Custom desktop entry not found in repo. Skipping..."
 fi
 
-# Launch Firefox with the pre-configured profile
+# Launch Tailfox Browser with the pre-configured profile
 echo "Launching Tailfox Browser..."
-firefox --profile "$HOME/.mozilla/firefox/custom-profile" \
-  --new-instance \
-  --no-remote \
-  --disable-crash-reporter \
-  --disable-features=UsePortal \
-  >/dev/null 2>&1
+firefox --profile "$HOME/.mozilla/firefox/custom-profile" --no-default-browser-check
 
-# Overwrite default Firefox desktop entry with custom icon
+# Overwrite default Firefox desktop entry with custom icon and name
 DESKTOP_ENTRY_PATH="/usr/share/applications/firefox.desktop"
 CUSTOM_ICON_PATH="$HOME/.local/share/icons/Tailfox-icon.png"
 
 if [ -f "$DESKTOP_ENTRY_PATH" ]; then
-    echo "Applying custom icon to Firefox desktop entry..."
+    echo "Applying custom icon and name to Firefox desktop entry..."
+    
+    # Replace the icon with the custom one
     sudo sed -i "s|^Icon=.*|Icon=$CUSTOM_ICON_PATH|g" "$DESKTOP_ENTRY_PATH"
+    
+    # Replace all instances of "Firefox" with "Tailfox"
+    sudo sed -i "s/Firefox/Tailfox/g" "$DESKTOP_ENTRY_PATH"
+    
+    # Update the desktop database to apply the changes
+    sudo update-desktop-database
 fi
 
-echo "Customizations applied after Firefox launch."
+echo "Customizations applied after Tailfox launch."
+
