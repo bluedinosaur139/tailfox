@@ -13,18 +13,18 @@ cd tailfox
 sh launch-tailfox.sh
 ```
 
-if you dont have git:
+if you dont have git or unzip:
 
 for debian:
 
 ```
-sudo apt install git
+sudo apt install git unzip
 ```
 
 for arch:
 
 ```
-sudo pacman -S git
+sudo pacman -S git upzip
 ```
 
 after its installed search for tailfox and pin it to taksbar or desktop
